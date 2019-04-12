@@ -1,0 +1,170 @@
+<script type="text/javascript">
+	RED.nodes.registerType('meteor-ddp-connect',{
+		category: 'meteor-ddp',
+		color: '#C7E9C0',
+		defaults: {
+			hostname: {value:""},
+			hostport:{value:3000},
+			session:{value:""},
+			ssl:{value:false},
+			autoReconnect:{value:true},
+			autoReconnectTimer: {value:500},
+			maintainCollections: {value:true}
+		},
+		inputs:1,
+		outputs:2,
+		icon: "MeteorIcon.png",
+		label: function() {
+			return this.hostname||"meteor-ddp-connect";
+		}
+	});
+</script>
+
+<script type="text/x-red" data-template-name="meteor-ddp-connect">
+	<div class="form-row">
+		<label for="node-input-hostname"><i class="icon-tag"></i> Hostname</label>
+		<input type="text" id="node-input-hostname" placeholder="Hostname url">
+	</div>
+	<div class="form-row">
+		<label for="node-input-hostport"><i class="icon-tag"></i> Hostport</label>
+		<input type="text" id="node-input-hostport" placeholder="3000">
+	</div>
+	<div class="form-row">
+		<label for="node-input-ssl"><i class="icon-tag"></i> SSL</label>
+		<input type="checkbox" id="node-input-ssl">
+	</div>
+	<div class="form-row">
+		<label for="node-input-autoReconnect"><i class="icon-tag"></i> Auto-reconnect:</label>
+		<input type="checkbox" id="node-input-autoReconnect">
+	</div>
+	<div class="form-row">
+		<label for="node-input-autoReconnectTimer"><i class="icon-tag"></i> Auto-reconnect-timer:</label>
+		<input type="text" id="node-input-autoReconnectTimer" placeholder="500">
+	</div>
+	<div class="form-row">
+		<label for="node-input-maintainCollections"><i class="icon-tag"></i> Maintain collections:</label>
+		<input type="checkbox" id="node-input-maintainCollections">
+	</div>
+	<div class="form-row">
+		<label for="node-input-session"><i class="icon-tag"></i> Session</label>
+		<input type="text" id="node-input-session" placeholder="default">
+	</div>
+</script>
+
+<script type="text/x-red" data-help-name="meteor-ddp-connect">
+	<p>A simple node that connects to Meteor server instance via DDP.</p>
+	<p>Implements API of <a href="https://www.npmjs.com/package/ddp">DDP node module</a></p>
+	<p><code>Output 1</code> sends a message for every event received from the server.</p>
+	<p><code>Output 2</code> sends a message for when the connection changes the status (connected, socket-close, etc.)</p>
+	<p><code>Session</code> specifies a session name to identify a connection in the node-red global context.</p>
+	<h3>Example</h3>
+	You can see README.md to find an example flow, and an example to create a test Meteor application for the example flow.
+</script>
+
+
+<script type="text/javascript">
+	RED.nodes.registerType('meteor-ddp-subscribe',{
+		category: 'meteor-ddp',
+		color: '#C7E9C0',
+		defaults: {
+			publishname: {value:""},
+			collectionname:{value:""},
+			session:{value:""}
+		},
+		inputs:1,
+		outputs:2,
+		icon: "MeteorIcon.png",
+		label: function() {
+			return this.publishname||"meteor-ddp-subscribe";
+		}
+	});
+</script>
+
+<script type="text/x-red" data-template-name="meteor-ddp-subscribe">
+	<div class="form-row">
+		<label for="node-input-publishname"><i class="icon-tag"></i> Subscribe to:</label>
+		<input type="text" id="node-input-publishname" placeholder="Publish name">
+	</div>
+	<div class="form-row">
+		<label for="node-input-collectionname"><i class="icon-tag"></i> Collection:</label>
+		<input type="text" id="node-input-collectionname" placeholder="filter on this collection name">
+	</div>
+	<div class="form-row">
+		<label for="node-input-session"><i class="icon-tag"></i> Session</label>
+		<input type="text" id="node-input-session" placeholder="default">
+	</div>
+</script>
+
+<script type="text/x-red" data-help-name="meteor-ddp-subscribe">
+	<p>A simple node that subscribe to a DDP Publish</p>
+	<p>Accept params via <code>msg.payload</code>, and publish name via <code>msg.topic</code></p>
+	<p><code>Collection name</code> specifies witch collection maintain in the client with updates.</p>
+	<p><code>Output 1</code> sends a message for every "added","changed","removed" event on the collection.</p>
+	<p><code>Output 2</code> sends a message for when the subscription is ready containing all received document in the collection.</p>
+	<p><code>Session</code> specifies a session name to identify a connection in the node-red global context.</p>
+</script>
+
+
+<script type="text/javascript">
+	RED.nodes.registerType('meteor-ddp-call',{
+		category: 'meteor-ddp',
+		color: '#C7E9C0',
+		defaults: {
+			methodname: {value:""},
+			session:{value:""}
+		},
+		inputs:1,
+		outputs:2,
+		icon: "MeteorIcon.png",
+		label: function() {
+			return this.methodname||"meteor-ddp-call";
+		}
+	});
+</script>
+
+<script type="text/x-red" data-template-name="meteor-ddp-call">
+	<div class="form-row">
+		<label for="node-input-methodname"><i class="icon-tag"></i> Method name:</label>
+		<input type="text" id="node-input-methodname" placeholder="Method name">
+	</div>
+	<div class="form-row">
+		<label for="node-input-session"><i class="icon-tag"></i> Session</label>
+		<input type="text" id="node-input-session" placeholder="default">
+	</div>
+</script>
+
+<script type="text/x-red" data-help-name="meteor-ddp-call">
+	<p>A simple node that calls a DDP Method</p>
+	<p>Accept params via <code>msg.payload</code>, and method name via <code>msg.topic</code></p>
+	<p><code>Output 1</code> sends a message when the server responds to the method call.</p>
+	<p><code>Output 2</code> sends a message when the method operates on a collection and the documents are ready on the client</p>
+	<p><code>Session</code> specifies a session name to identify a connection in the node-red global context.</p>
+</script>
+
+<script type="text/javascript">
+	RED.nodes.registerType('meteor-ddp-close',{
+		category: 'meteor-ddp',
+		color: '#C7E9C0',
+		defaults: {
+			session:{value:""}
+		},
+		inputs:1,
+		outputs:1,
+		icon: "MeteorIcon.png",
+		label: function() {
+			return this.hostname||"meteor-ddp-close";
+		}
+	});
+</script>
+
+<script type="text/x-red" data-template-name="meteor-ddp-close">
+	<div class="form-row">
+		<label for="node-input-session"><i class="icon-tag"></i> Session</label>
+		<input type="text" id="node-input-session" placeholder="default">
+	</div>
+</script>
+
+<script type="text/x-red" data-help-name="meteor-ddp-close">
+	<p>A simple node that close an open DDP Connection with same session name</p>
+	<p><code>Session</code> specifies a session name to identify a connection in the node-red global context.</p>
+</script>

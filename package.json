@@ -1,0 +1,19 @@
+{
+  "name": "node-red-contrib-meteor-ddp",
+  "version": "1.0.0",
+  "description": "A node-red node to connect node-red flows to meteor application via DDP",
+  "main": "node-red-contrib-meteor-ddp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Carlo Cassinari - Techmakers srl",
+  "license": "ISC",
+  "dependencies": {
+      "ddp": "*"
+  },
+  "node-red" : {
+      "nodes": {
+        "meteor-ddp": "meteor-ddp.js"
+      }
+  }
+}
