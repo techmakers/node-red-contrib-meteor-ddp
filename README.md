@@ -43,251 +43,316 @@ Import the following flow in Node-red and test every Meteor DDP Node.
 ```
 [
 	{
-		"id": "f7652c36.b25e9",
+		"id": "ebdf300b.cfe4",
 		"type": "tab",
 		"label": "Flow 1",
 		"disabled": false,
 		"info": ""
 	},
 	{
-		"id": "e60d74cd.281948",
+		"id": "2093cb21.c70964",
 		"type": "meteor-ddp-subscribe",
-		"z": "f7652c36.b25e9",
+		"z": "ebdf300b.cfe4",
 		"publishname": "list",
 		"collectionname": "list",
 		"session": "",
-		"x": 390,
+		"x": 570,
 		"y": 200,
 		"wires": [
 			[
-				"679f3ba3.554514"
+				"1e8d3688.9c6779"
 			],
 			[
-				"7a56e053.0ff5"
+				"1103e8dd.09eed7"
 			]
 		]
 	},
 	{
-		"id": "1c66f182.21d14e",
-		"type": "meteor-ddp-call",
-		"z": "f7652c36.b25e9",
-		"methodname": "",
-		"session": "",
-		"x": 420,
-		"y": 320,
-		"wires": [
-			[
-				"d4b9fda6.7df12"
-			],
-			[
-				"9c82eaae.a461b8"
-			]
-		]
-	},
-	{
-		"id": "d4b9fda6.7df12",
+		"id": "1e8d3688.9c6779",
 		"type": "debug",
-		"z": "f7652c36.b25e9",
-		"name": "method executed",
-		"active": true,
-		"tosidebar": true,
-		"console": false,
-		"tostatus": false,
-		"complete": "true",
-		"x": 690,
-		"y": 300,
-		"wires": []
-	},
-	{
-		"id": "679f3ba3.554514",
-		"type": "debug",
-		"z": "f7652c36.b25e9",
+		"z": "ebdf300b.cfe4",
 		"name": "subscribe events",
-		"active": true,
+		"active": false,
 		"tosidebar": true,
 		"console": false,
 		"tostatus": false,
 		"complete": "payload",
-		"x": 690,
+		"x": 870,
 		"y": 180,
 		"wires": []
 	},
 	{
-		"id": "8454a0f0.811b5",
+		"id": "25e0ccb0.1e7714",
 		"type": "debug",
-		"z": "f7652c36.b25e9",
+		"z": "ebdf300b.cfe4",
 		"name": "ddp1",
 		"active": false,
 		"tosidebar": true,
 		"console": false,
 		"tostatus": false,
 		"complete": "true",
-		"x": 650,
+		"x": 830,
 		"y": 60,
 		"wires": []
 	},
 	{
-		"id": "5a5efcd9.1b6f84",
+		"id": "3fbca72.285ff58",
 		"type": "debug",
-		"z": "f7652c36.b25e9",
+		"z": "ebdf300b.cfe4",
 		"name": "ddp2",
 		"active": true,
 		"tosidebar": true,
 		"console": false,
 		"tostatus": false,
 		"complete": "true",
-		"x": 650,
+		"x": 830,
 		"y": 100,
 		"wires": []
 	},
 	{
-		"id": "7583223c.79fabc",
+		"id": "2fd1e4a.c91a11c",
 		"type": "inject",
-		"z": "f7652c36.b25e9",
+		"z": "ebdf300b.cfe4",
 		"name": "",
 		"topic": "",
 		"payload": "",
-		"payloadType": "date",
+		"payloadType": "str",
 		"repeat": "",
 		"crontab": "",
 		"once": true,
 		"onceDelay": "1",
-		"x": 150,
+		"x": 90,
 		"y": 80,
 		"wires": [
 			[
-				"99909caa.4771f"
+				"9d98ba64.e58d48"
 			]
 		]
 	},
 	{
-		"id": "c6225fdf.d3631",
-		"type": "inject",
-		"z": "f7652c36.b25e9",
-		"name": "",
-		"topic": "",
-		"payload": "{\"name\":\"Ciao\"}",
-		"payloadType": "json",
-		"repeat": "",
-		"crontab": "",
-		"once": false,
-		"onceDelay": 0.1,
-		"x": 160,
-		"y": 180,
-		"wires": [
-			[
-				"e60d74cd.281948"
-			]
-		]
-	},
-	{
-		"id": "3166c640.5ec5da",
-		"type": "inject",
-		"z": "f7652c36.b25e9",
-		"name": "",
-		"topic": "addToList",
-		"payload": "{\"name\":\"Carletto\"}",
-		"payloadType": "json",
-		"repeat": "",
-		"crontab": "",
-		"once": false,
-		"onceDelay": 0.1,
-		"x": 200,
-		"y": 320,
-		"wires": [
-			[
-				"1c66f182.21d14e"
-			]
-		]
-	},
-	{
-		"id": "99909caa.4771f",
+		"id": "9d98ba64.e58d48",
 		"type": "meteor-ddp-connect",
-		"z": "f7652c36.b25e9",
+		"z": "ebdf300b.cfe4",
 		"hostname": "",
 		"hostport": 3000,
 		"session": "",
 		"ssl": false,
-		"x": 440,
+		"x": 620,
 		"y": 80,
 		"wires": [
 			[
-				"8454a0f0.811b5"
+				"25e0ccb0.1e7714"
 			],
 			[
-				"5a5efcd9.1b6f84"
+				"3fbca72.285ff58"
 			]
 		]
 	},
 	{
-		"id": "b2dadc9b.20ae3",
+		"id": "e2961460.8ff638",
 		"type": "inject",
-		"z": "f7652c36.b25e9",
+		"z": "ebdf300b.cfe4",
 		"name": "",
 		"topic": "",
-		"payload": "{\"name\":\"Carletto\"}",
+		"payload": "{\"name\":\"Adam\"}",
 		"payloadType": "json",
 		"repeat": "",
 		"crontab": "",
 		"once": false,
 		"onceDelay": 0.1,
-		"x": 170,
-		"y": 220,
+		"x": 120,
+		"y": 200,
 		"wires": [
 			[
-				"e60d74cd.281948"
+				"2093cb21.c70964",
+				"d6d58b8e.9fb068"
 			]
 		]
 	},
 	{
-		"id": "7a56e053.0ff5",
+		"id": "1103e8dd.09eed7",
 		"type": "debug",
-		"z": "f7652c36.b25e9",
+		"z": "ebdf300b.cfe4",
 		"name": "subscribe collection",
+		"active": false,
+		"tosidebar": true,
+		"console": false,
+		"tostatus": false,
+		"complete": "payload",
+		"x": 880,
+		"y": 220,
+		"wires": []
+	},
+	{
+		"id": "f728b1b1.f4017",
+		"type": "meteor-ddp-close",
+		"z": "ebdf300b.cfe4",
+		"session": "",
+		"x": 610,
+		"y": 780,
+		"wires": [
+			[
+				"a81ad964.600078"
+			]
+		]
+	},
+	{
+		"id": "ed366849.9396d8",
+		"type": "inject",
+		"z": "ebdf300b.cfe4",
+		"name": "",
+		"topic": "",
+		"payload": "",
+		"payloadType": "str",
+		"repeat": "",
+		"crontab": "",
+		"once": false,
+		"onceDelay": 0.1,
+		"x": 90,
+		"y": 780,
+		"wires": [
+			[
+				"f728b1b1.f4017"
+			]
+		]
+	},
+	{
+		"id": "a81ad964.600078",
+		"type": "debug",
+		"z": "ebdf300b.cfe4",
+		"name": "close",
 		"active": true,
 		"tosidebar": true,
 		"console": false,
 		"tostatus": false,
 		"complete": "payload",
-		"x": 700,
-		"y": 220,
+		"x": 830,
+		"y": 780,
 		"wires": []
 	},
 	{
-		"id": "9c82eaae.a461b8",
+		"id": "d6d58b8e.9fb068",
+		"type": "meteor-ddp-observe",
+		"z": "ebdf300b.cfe4",
+		"criteria": "",
+		"session": "",
+		"collectionname": "list",
+		"x": 620,
+		"y": 360,
+		"wires": [
+			[
+				"473f5306.6341ec"
+			],
+			[
+				"d166bfcc.9d14a"
+			],
+			[
+				"226c7969.4950f6"
+			]
+		]
+	},
+	{
+		"id": "473f5306.6341ec",
 		"type": "debug",
-		"z": "f7652c36.b25e9",
-		"name": "method effect on data completed",
+		"z": "ebdf300b.cfe4",
+		"name": "Added to list",
+		"active": true,
+		"tosidebar": true,
+		"console": false,
+		"tostatus": false,
+		"complete": "payload",
+		"x": 850,
+		"y": 320,
+		"wires": []
+	},
+	{
+		"id": "d166bfcc.9d14a",
+		"type": "debug",
+		"z": "ebdf300b.cfe4",
+		"name": "Changed in list",
+		"active": true,
+		"tosidebar": true,
+		"console": false,
+		"tostatus": false,
+		"complete": "payload",
+		"x": 860,
+		"y": 360,
+		"wires": []
+	},
+	{
+		"id": "226c7969.4950f6",
+		"type": "debug",
+		"z": "ebdf300b.cfe4",
+		"name": "Removed from list",
+		"active": true,
+		"tosidebar": true,
+		"console": false,
+		"tostatus": false,
+		"complete": "payload",
+		"x": 870,
+		"y": 400,
+		"wires": []
+	},
+	{
+		"id": "555cdaf3.cd2454",
+		"type": "inject",
+		"z": "ebdf300b.cfe4",
+		"name": "",
+		"topic": "",
+		"payload": "false",
+		"payloadType": "bool",
+		"repeat": "",
+		"crontab": "",
+		"once": false,
+		"onceDelay": 0.1,
+		"x": 90,
+		"y": 360,
+		"wires": [
+			[
+				"d6d58b8e.9fb068",
+				"2093cb21.c70964"
+			]
+		]
+	},
+	{
+		"id": "319f8a95.3483e6",
+		"type": "meteor-ddp-call",
+		"z": "ebdf300b.cfe4",
+		"methodname": "",
+		"session": "",
+		"x": 600,
+		"y": 540,
+		"wires": [
+			[
+				"6ccfe8fc.1a7398"
+			],
+			[
+				"3ededb9b.57def4"
+			]
+		]
+	},
+	{
+		"id": "6ccfe8fc.1a7398",
+		"type": "debug",
+		"z": "ebdf300b.cfe4",
+		"name": "method executed",
 		"active": true,
 		"tosidebar": true,
 		"console": false,
 		"tostatus": false,
 		"complete": "true",
-		"x": 740,
-		"y": 340,
+		"x": 870,
+		"y": 520,
 		"wires": []
 	},
 	{
-		"id": "67ac7a39.9090d4",
-		"type": "meteor-ddp-close",
-		"z": "f7652c36.b25e9",
-		"session": "",
-		"x": 430,
-		"y": 420,
-		"wires": [
-			[
-				"8561f38a.aa7bf"
-			]
-		]
-	},
-	{
-		"id": "e5866700.83f1b8",
+		"id": "4f37815a.f8ec4",
 		"type": "inject",
-		"z": "f7652c36.b25e9",
+		"z": "ebdf300b.cfe4",
 		"name": "",
-		"topic": "",
-		"payload": "",
-		"payloadType": "date",
+		"topic": "add",
+		"payload": "{\"name\":\"Adam\"}",
+		"payloadType": "json",
 		"repeat": "",
 		"crontab": "",
 		"once": false,
@@ -296,23 +361,160 @@ Import the following flow in Node-red and test every Meteor DDP Node.
 		"y": 420,
 		"wires": [
 			[
-				"67ac7a39.9090d4"
+				"319f8a95.3483e6"
 			]
 		]
 	},
 	{
-		"id": "8561f38a.aa7bf",
+		"id": "3ededb9b.57def4",
 		"type": "debug",
-		"z": "f7652c36.b25e9",
-		"name": "close",
+		"z": "ebdf300b.cfe4",
+		"name": "method effect on data completed",
 		"active": true,
 		"tosidebar": true,
 		"console": false,
 		"tostatus": false,
-		"complete": "payload",
-		"x": 650,
-		"y": 420,
+		"complete": "true",
+		"x": 920,
+		"y": 560,
 		"wires": []
+	},
+	{
+		"id": "3e4e54e.b4fecac",
+		"type": "inject",
+		"z": "ebdf300b.cfe4",
+		"name": "",
+		"topic": "update",
+		"payload": "Adam",
+		"payloadType": "str",
+		"repeat": "",
+		"crontab": "",
+		"once": false,
+		"onceDelay": 0.1,
+		"x": 110,
+		"y": 520,
+		"wires": [
+			[
+				"defdbf70.eb8ff"
+			]
+		]
+	},
+	{
+		"id": "bc41842f.31b608",
+		"type": "inject",
+		"z": "ebdf300b.cfe4",
+		"name": "",
+		"topic": "remove",
+		"payload": "{\"name\":\"Adam\"}",
+		"payloadType": "json",
+		"repeat": "",
+		"crontab": "",
+		"once": false,
+		"onceDelay": 0.1,
+		"x": 150,
+		"y": 620,
+		"wires": [
+			[
+				"319f8a95.3483e6"
+			]
+		]
+	},
+	{
+		"id": "a5dd904b.f5047",
+		"type": "inject",
+		"z": "ebdf300b.cfe4",
+		"name": "",
+		"topic": "",
+		"payload": "{\"name\":\"Eve\"}",
+		"payloadType": "json",
+		"repeat": "",
+		"crontab": "",
+		"once": false,
+		"onceDelay": 0.1,
+		"x": 120,
+		"y": 280,
+		"wires": [
+			[
+				"2093cb21.c70964",
+				"d6d58b8e.9fb068"
+			]
+		]
+	},
+	{
+		"id": "f0cb08e5.7ad788",
+		"type": "inject",
+		"z": "ebdf300b.cfe4",
+		"name": "",
+		"topic": "add",
+		"payload": "{\"name\":\"Eve\"}",
+		"payloadType": "json",
+		"repeat": "",
+		"crontab": "",
+		"once": false,
+		"onceDelay": 0.1,
+		"x": 130,
+		"y": 460,
+		"wires": [
+			[
+				"319f8a95.3483e6"
+			]
+		]
+	},
+	{
+		"id": "5cb57dd2.eaa604",
+		"type": "inject",
+		"z": "ebdf300b.cfe4",
+		"name": "",
+		"topic": "remove",
+		"payload": "{\"name\":\"Eve\"}",
+		"payloadType": "json",
+		"repeat": "",
+		"crontab": "",
+		"once": false,
+		"onceDelay": 0.1,
+		"x": 140,
+		"y": 660,
+		"wires": [
+			[
+				"319f8a95.3483e6"
+			]
+		]
+	},
+	{
+		"id": "defdbf70.eb8ff",
+		"type": "function",
+		"z": "ebdf300b.cfe4",
+		"name": "Criteria and Modifier",
+		"func": "msg.payload = {\n    \"criteria\":{\"name\":msg.payload},\n    \"modifier\":{\"$inc\":{\"age\":1}}\n}\nreturn msg;",
+		"outputs": 1,
+		"noerr": 0,
+		"x": 320,
+		"y": 540,
+		"wires": [
+			[
+				"319f8a95.3483e6"
+			]
+		]
+	},
+	{
+		"id": "9f1f4298.0e96e",
+		"type": "inject",
+		"z": "ebdf300b.cfe4",
+		"name": "",
+		"topic": "update",
+		"payload": "Eve",
+		"payloadType": "str",
+		"repeat": "",
+		"crontab": "",
+		"once": false,
+		"onceDelay": 0.1,
+		"x": 110,
+		"y": 560,
+		"wires": [
+			[
+				"defdbf70.eb8ff"
+			]
+		]
 	}
 ]
 ```

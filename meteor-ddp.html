@@ -98,11 +98,59 @@
 <script type="text/x-red" data-help-name="meteor-ddp-subscribe">
 	<p>A simple node that subscribe to a DDP Publish</p>
 	<p>Accept params via <code>msg.payload</code>, and publish name via <code>msg.topic</code></p>
+	<p>Send a <code>msg.payload = false</code> to unsubscribe.</p>
 	<p><code>Collection name</code> specifies witch collection maintain in the client with updates.</p>
 	<p><code>Output 1</code> sends a message for every "added","changed","removed" event on the collection.</p>
 	<p><code>Output 2</code> sends a message for when the subscription is ready containing all received document in the collection.</p>
 	<p><code>Session</code> specifies a session name to identify a connection in the node-red global context.</p>
+	<p>Please note that a newly created Meteor application contains the "autopublish" package, the best is run <code>meteor remove autopublish</code></p>
 </script>
+
+
+<script type="text/javascript">
+	RED.nodes.registerType('meteor-ddp-observe',{
+		category: 'meteor-ddp',
+		color: '#C7E9C0',
+		defaults: {
+			criteria: {value:""},
+			session:{value:""},
+			collectionname:{value:""}
+		},
+		inputs:1,
+		outputs:3,
+		icon: "MeteorIcon.png",
+		label: function() {
+			return this.publishname||"meteor-ddp-observe";
+		}
+	});
+</script>
+
+<script type="text/x-red" data-template-name="meteor-ddp-observe">
+	<div class="form-row">
+		<label for="node-input-collectionname"><i class="icon-tag"></i> Collection:</label>
+		<input type="text" id="node-input-collectionname" placeholder="filter on this collection name">
+	</div>
+	<div class="form-row">
+		<label for="node-input-criteria"><i class="icon-tag"></i> Criteria:</label>
+		<input type="text" id="node-input-criteria" placeholder="{field:value}">
+	</div>
+	<div class="form-row">
+		<label for="node-input-session"><i class="icon-tag"></i> Session</label>
+		<input type="text" id="node-input-session" placeholder="default">
+	</div>
+</script>
+
+<script type="text/x-red" data-help-name="meteor-ddp-observe">
+	<p>A simple node that observe a collection</p>
+	<p>Accept observe criteria via <code>msg.payload</code>, and collection name via <code>msg.topic</code></p>
+	<p>Send a <code>msg.payload = false</code> to stop observing.</p>
+	<p><code>Collection name</code> specifies witch collection will be observed</p>
+	<p><code>Output 1</code> sends a message for every "added" event on the collection.</p>
+	<p><code>Output 2</code> sends a message for every "changed" event on the collection.</p>
+	<p><code>Output 3</code> sends a message for every "removed" event on the collection.</p>
+	<p><code>Session</code> specifies a session name to identify a connection in the node-red global context.</p>
+</script>
+
 
 
 <script type="text/javascript">

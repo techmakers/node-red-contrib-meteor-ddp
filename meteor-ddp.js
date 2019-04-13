@@ -1,8 +1,16 @@
 module.exports = function(RED) {
+	_ = require("underscore") ;
 	function MeteorDDPConnect(config) {
 		RED.nodes.createNode(this,config);
 		config.session = config.session || "defaultsession" ;
 		var node = this;
+		
+		var m = node.context().global.get("meteor-ddp") || {} ;
+		if (m.sessions && m.sessions[config.session]) {
+			delete(m.sessions[config.session]) ;
+			node.context().global.set("meteor-ddp",m) ;
+		}
+
 		node.status({});
 		node.on('input', function(msg) {
 			
@@ -12,7 +20,6 @@ module.exports = function(RED) {
 			
 			var m = node.context().global.get("meteor-ddp") || {} ;
 			if (m.sessions && m.sessions[config.session]) {
-				console.log("already connected") ;
 				return ;
 			}
 			DDPConnect({
@@ -32,9 +39,9 @@ module.exports = function(RED) {
 		RED.nodes.createNode(this,config);
 		config.session = config.session || "defaultsession" ;
 		var node = this;
-		node.status(); 
+		node.status({}); 
 		node.on('input', function(msg) {
-			node.status();
+			node.status({});
 			var m = node.context().global.get("meteor-ddp") || {} ;
 			if (!m.sessions) return ;
 			var ddpclient = m.sessions[config.session] ;
@@ -42,9 +49,16 @@ module.exports = function(RED) {
 				node.warn("ddp session expired",config.session) ;
 				return ;
 			}
+			
 			if (node.sub){
 				ddpclient.unsubscribe(node.sub._id) ;
 			}
+			
+			if (msg.payload === false){
+				delete(node.onMessage) ;
+				return ;
+			}
+			
 			if (!node.onMessage) {
 				node.onMessage = function (ddpmessage) {
 					var message = ddpclient.EJSON.parse(ddpmessage);
@@ -66,6 +80,73 @@ module.exports = function(RED) {
 				}
 			});
 		});
+	}
+	
+	function MeteorDDPObserveNode (config) {
+		RED.nodes.createNode(this,config);
+		config.session = config.session || "defaultsession" ;
+		var node = this;
+		node.status({}); 
+		node.on('input', function(msg) {
+			node.status({});
+			var m = node.context().global.get("meteor-ddp") || {} ;
+			if (!m.sessions) return ;
+			node.ddpclient = m.sessions[config.session] ;
+			if (!node.ddpclient) {
+				node.warn("ddp session expired",config.session) ;
+				return ;
+			}
+			if (node.observer){
+				node.observer.stop() ;
+				delete(node.observer) ;
+			}
+			
+			if (msg.payload === false) {
+				return ;
+			} else {
+				if (msg.payload){
+					node.criteria = msg.payload ;
+				} 
+			}
+			
+			node.status({fill:"yellow",shape:"ring",text:"Preparing to observe..."});
+			node.observer = node.ddpclient.observe(config.collectionname || msg.topic);
+			
+			node.observer.added = function(id){
+				msg.topic = config.collectionname || msg.topic ;
+				msg.payload = node.checkDocAgainstCriteria(config.collectionname || msg.topic, id,node.criteria) ;
+				if (msg.payload) node.send([msg,null,null]) ;
+			};
+			
+			node.observer.changed = function(id, oldFields, clearedFields){
+				msg.topic = config.collectionname || msg.topic ;
+				var matchingDoc = node.checkDocAgainstCriteria(config.collectionname || msg.topic, id,node.criteria) ;
+				if (matchingDoc) {
+					msg.payload = {
+						doc : matchingDoc,
+						oldFields: oldFields,
+						clearedFields: clearedFields
+					}
+					node.send([null,msg,null]) ;
+				}
+			};
+			node.observer.removed = function(id, oldValue){
+				msg.topic = config.collectionname || msg.topic ;
+				if (!config.criteria || _.isMatch(oldValue,node.criteria)){
+					msg.payload = {
+						_id: id,
+						oldValue: oldValue
+					}
+					node.send([null,null,msg]) ;
+				}
+			};			
+			node.status({fill:"green",shape:"ring",text:"Observing"});
+		});
+	
+		node.checkDocAgainstCriteria = function(collectionName,docId,criteria){
+			var doc = node.ddpclient.collections[collectionName][docId] ;
+			if (!criteria || _.isMatch(doc,criteria)) return doc ;
+		}
 	}
 	
 	function MeteorDDPMethodCallNode(config) {
@@ -189,6 +270,7 @@ module.exports = function(RED) {
 	
 	RED.nodes.registerType("meteor-ddp-connect",MeteorDDPConnect);
 	RED.nodes.registerType("meteor-ddp-subscribe", MeteorDDPSubscribeNode) ;
+	RED.nodes.registerType("meteor-ddp-observe", MeteorDDPObserveNode) ;
 	RED.nodes.registerType("meteor-ddp-call", MeteorDDPMethodCallNode) ;
 	RED.nodes.registerType("meteor-ddp-close", MeteorDDPClose) ;
 

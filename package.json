@@ -9,7 +9,8 @@
   "author": "Carlo Cassinari - Techmakers srl",
   "license": "ISC",
   "dependencies": {
-      "ddp": "*"
+      "ddp": "*",
+      "underscore" : "*"
   },
   "node-red" : {
       "nodes": {
