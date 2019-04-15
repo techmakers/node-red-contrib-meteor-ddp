@@ -27,7 +27,7 @@ will do the job. Don't forget to ```cd``` in the ```.node-red``` directory befor
 
 ## Example flow
 
-This picture shows how the [example flow](NodeRedExampleFlow/flow.json) should appear on your NODE-RED interface.
+This picture shows how the [example flow](https://github.com/techmakers/node-red-contrib-meteor-ddp/blob/master/NodeRedExampleFlow/flow.json) should appear on your NODE-RED interface.
 
 ![NODE-RED DDP NODES EXAMPLE FLOW](images/NODE-RED_DDP_NODES_EXAMPLE_FLOW.png)
 
@@ -77,14 +77,15 @@ Meteor.startup(() => {
 We suggest some readings before start to play with this about the [Meteor Publish and Subscribe concepts](https://docs.meteor.com/api/pubsub.html)
 
 1. Be sure you have the Meteor Example Application up and running on the same machine you are running node-red, otherwise, update the ```meteor-ddp-connect``` node to attach to a different server
-2. Import the example flow in your NODE-RED application
-3. Deploy the imported flow
-4. The flow automatically connects to the Meteor Example Application
-5. Subscribe and observe all documents in the ```list``` collection with name equals to "Adam" by clicking on the ```{"name":"Adam"}``` node.
-6. Add a document to the collection clicking on the ```add:{"name":"Adam"}``` node.
-7. If everything is ok you should see on the right debug pane messages coming from the subscribe ```list``` and ```meteor-ddp-observe``` nodes.
-8. You can play switching from Adam to Eve and see what appens if you add a document in the ```list``` collection with the subscribe and observe.
-9. You can also try to modifiy documents in the meteor database using MongoDB commands to insert, update, remove documents and receive events on the NODE-RED flow thanks the Meteor reactivity model.
+2. Copy the [example flow](https://github.com/techmakers/node-red-contrib-meteor-ddp/blob/master/NodeRedExampleFlow/flow.json) in the clipboard
+3. In your NODE-RED application, using the top-right menu icon -> import -> clipboard paste the clipboard content and select "new flow"
+4. Deploy the imported flow
+5. The flow automatically connects to the Meteor Example Application
+6. Subscribe and observe all documents in the ```list``` collection with name equals to "Adam" by clicking on the ```{"name":"Adam"}``` node.
+7. Add a document to the collection clicking on the ```add:{"name":"Adam"}``` node.
+8. If everything is ok you should see on the right debug pane messages coming from the subscribe ```list``` and ```meteor-ddp-observe``` nodes.
+9. You can play switching from Adam to Eve and see what appens if you add a document in the ```list``` collection with the subscribe and observe.
+10. You can also try to modifiy documents in the meteor database using MongoDB commands to insert, update, remove documents and receive events on the NODE-RED flow thanks the Meteor reactivity model.
 
 ## Some words about security
 
