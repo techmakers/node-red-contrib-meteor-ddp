@@ -36,7 +36,8 @@ This picture shows how the [example flow](https://github.com/techmakers/node-red
 1. download if needed [MeteorJS](https://www.meteor.com/)
 2. enter a desired directory
 3. create a Meteor Application with the command ```meteor create myexample``` and enter the directory with ```cd myexample```
-4. edit the file in myexample/server/main.js to obtain something like that
+4. remove the "autopublish" package with the command ```meteor remove autopublish``` to avoid unwanted documents on the client
+5. edit the file in myexample/server/main.js to obtain something like that
 
 ```
 import { Meteor } from 'meteor/meteor';
@@ -70,7 +71,7 @@ Meteor.startup(() => {
 
 ```
 
-5. now you can run the Meteor application with command ```meteor``` and test the example flow clicking on the left-side injections nodes.
+6. now you can run the Meteor application with command ```meteor``` and test the example flow clicking on the left-side injections nodes.
 
 ## How to use example flow
 
